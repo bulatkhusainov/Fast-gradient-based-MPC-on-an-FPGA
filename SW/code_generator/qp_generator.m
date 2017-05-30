@@ -38,7 +38,7 @@ function [qp_problem] = qp_generator(current_design, model)
     Q_big = blkdiag(Q_big, Q);
     qp_problem.Q_big = Q_big;
 
-    R = 0.5*eye(l);
+    R = 0.01*eye(l);
     qp_problem.R = R;
     R_big = kron(eye(N), R);
     qp_problem.R_big = R_big;

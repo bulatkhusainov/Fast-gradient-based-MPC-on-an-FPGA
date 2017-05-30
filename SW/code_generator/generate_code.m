@@ -4,7 +4,7 @@ current_design.N = 10; % horizon length
 current_design.n_bits_integer = 8; % number of integer bits
 current_design.n_bits_fraction = 10; % number of fraction bits 
 current_design.clock_target_freq = 100;
-current_design.n_iter = 40;	% number of FGM iterations (required for PIL)
+current_design.n_iter = 500;	% number of FGM iterations (required for PIL)
 
 %% calculate problem data based on design parameters
 % generate LTI SS model
@@ -34,7 +34,9 @@ fclose(fileID);
 % C file
 fileID = fopen('../src/fgm_mpc.c','w');
 
-fprintf(fileID,'#include "fgm_mpc.h"\n\n');
+fprintf(fileID,'#include "fgm_mpc.h"\n');
+fprintf(fileID,'#include "math.h"\n');
+fprintf(fileID,'#include "mex.h"\n\n');
 
 fprintf(fileID,'void fgm_mpc(d_fgm x_hat[n_states], d_fgm u_opt[n_opt_var])\n');
 fprintf(fileID,'{\n');
@@ -50,54 +52,75 @@ beta_var = qp_problem.beta_var; fprintf(fileID,strcat('\t',variables_declaration
 beta_plus = qp_problem.beta_plus; fprintf(fileID,strcat('\t',variables_declaration('var',beta_plus),'\n\n'));
 
 
-fprintf(fileID,'\td_fgm Z[n_opt_var];\n');
-fprintf(fileID,'\td_fgm Z_mult, Z_add;\n');
-fprintf(fileID,'\td_fgm Y[n_opt_var], Y_prev[n_opt_var];\n');
+fprintf(fileID,'\td_fgm Z_new[n_opt_var],Z[n_opt_var];\n');
+fprintf(fileID,'\td_fgm Y_new[n_opt_var], Y[n_opt_var];\n');
 fprintf(fileID,'\td_fgm h[n_opt_var];\n');
-fprintf(fileID,'\td_fgm h_mult, h_add;\n');
-fprintf(fileID,'\td_fgm Z_prev[n_opt_var];\n\n');
+fprintf(fileID,'\td_fgm T[n_opt_var];\n\n');
 
-fprintf(fileID,'\tx_init_outer_loop: for(i = 0; i < n_opt_var; i++)\n');
+fprintf(fileID,'\td_fgm iter_error;\n\n');
+
+fprintf(fileID,'\tx_init_outer_loop: for(i = 0; i < n_states; i++)\n');
 fprintf(fileID,'\t{\n');
-fprintf(fileID,'\t\th_add = 0;\n');
-fprintf(fileID,'\t\tx_init_inner_loop: for(j = 0; j < n_states; j++) //pipeline this loop;\n');
+fprintf(fileID,'\t\th[i] = 0;\n');
+fprintf(fileID,'\t\tx_init_inner_loop: for(j = 0; j < n_opt_var; j++) \n');
 fprintf(fileID,'\t\t{\n');
-fprintf(fileID,'\t\t\th_mult = x_hat[j] * h_x[j][i];\n');
-fprintf(fileID,'\t\t\th_add += h_mult;\n');
+fprintf(fileID,'\t\t\th[i] += x_hat[i] * h_x[i][j];\n');
 fprintf(fileID,'\t\t}\n');
-fprintf(fileID,'\t\th[i] = h_add;\n');
 fprintf(fileID,'\t}\n\n');
 
 
 fprintf(fileID,'\tguess_initialization: for(i = 0; i < n_opt_var; i++)\n');
 fprintf(fileID,'\t{\n');
-fprintf(fileID,'\t\tZ_prev[i] = 0;\n');
-fprintf(fileID,'\t\tY_prev[i] = 0;\n');
+fprintf(fileID,'\t\tZ[i] = 0;\n');
+fprintf(fileID,'\t\tY[i] = 0;\n');
 fprintf(fileID,'\t}\n\n');
 
 fprintf(fileID,'\titeration_loop: for(k = 1; k <= n_iter; k++)\n');
 fprintf(fileID,'\t{\n');
-fprintf(fileID,'\t\tvariable_loop:for(i = 0; i < n_opt_var; i++)\n');
+fprintf(fileID,'\t\tmv_mult:for(i = 0; i < n_opt_var; i++)\n');
 fprintf(fileID,'\t\t{\n');
-fprintf(fileID,'\t\t\tZ_add = 0;\n');
-fprintf(fileID,'\t\t\tmultiply_inner: for(j = 0; j < n_opt_var; j++) // pipeline and flattern off = 0;\n');
+fprintf(fileID,'\t\t\tT[i] = 0;\n');
+fprintf(fileID,'\t\t\tvv_mult: for(j = 0; j < n_opt_var; j++)\n');
 fprintf(fileID,'\t\t\t{\n');
-fprintf(fileID,'\t\t\t\tZ_mult = H_diff[i][j] * Y_prev[j];\n');
-fprintf(fileID,'\t\t\t\tZ_add += Z_mult;;\n');
+fprintf(fileID,'\t\t\t\tT[i] += H_diff[i][j] * Y[j];\n');
 fprintf(fileID,'\t\t\t}\n');
-fprintf(fileID,'\t\t\tZ[i] = Z_add - h[i];\n');
-fprintf(fileID,'\t\t\tZ[i] = Y[i] = beta_plus * Z[i] - beta_var * Z_prev[i];\n');
+fprintf(fileID,'\t\t\tT[i] = T[i] - h[i];\n');
 fprintf(fileID,'\t\t}\n\n');
-fprintf(fileID,'\t\tvariables_update: for(i=0; i < n_opt_var; i++) //pipeline\n');
+
+fprintf(fileID,'\t\tprojection_loop: for(i = 0; i < n_opt_var; i++)\n');
 fprintf(fileID,'\t\t{\n');
-fprintf(fileID,'\t\t\tZ_prev[i] = Z[i];\n');
-fprintf(fileID,'\t\t\tY_prev[i] = Y[i];\n');
+fprintf(fileID,'\t\t\tif(T[i] > b_upper[i])\n');
+fprintf(fileID,'\t\t\t{\n');
+fprintf(fileID,'\t\t\t\tZ_new[i] = b_upper[i];\n');
+fprintf(fileID,'\t\t\t}\n');
+fprintf(fileID,'\t\t\telse if (T[i] < b_lower[i])\n');
+fprintf(fileID,'\t\t\t{\n');
+fprintf(fileID,'\t\t\t\tZ_new[i] = b_lower[i];\n');
+fprintf(fileID,'\t\t\t}\n');
+fprintf(fileID,'\t\t\telse\n');
+fprintf(fileID,'\t\t\t{\n');
+fprintf(fileID,'\t\t\t\tZ_new[i] = T[i];\n');
+fprintf(fileID,'\t\t\t}\n');
+fprintf(fileID,'\t\t}\n\n');
+
+fprintf(fileID,'\t\tfgm_step:for(i = 0; i < n_opt_var; i++)\n');
+fprintf(fileID,'\t\t{\n');
+fprintf(fileID,'\t\t\tY_new[i] = beta_plus * Z_new[i] - beta_var * Z[i];		\n');
+fprintf(fileID,'\t\t}\n\n');
+
+fprintf(fileID,'\t\titer_error = 0;\n');
+fprintf(fileID,'\t\tupdate_loop: for(i=0; i < n_opt_var; i++)\n');
+fprintf(fileID,'\t\t{\n');
+fprintf(fileID,'\t\t\titer_error += fabs(Y[i] - Y_new[i]);\n');
+fprintf(fileID,'\t\t\tZ[i] = Z_new[i];\n');
+fprintf(fileID,'\t\t\tY[i] = Y_new[i];\n');
 fprintf(fileID,'\t\t}\n');
+fprintf(fileID,'\t\tprintf("error[%%d] = %%f \\n",k,iter_error);\n');
 fprintf(fileID,'\t}\n\n');
 
-fprintf(fileID,'\toutput_loop: for(i=0; i < n_opt_var; i++) //pipeline\n');
+fprintf(fileID,'\toutput_loop: for(i=0; i < n_opt_var; i++)\n');
 fprintf(fileID,'\t{\n');
-fprintf(fileID,'\t\tu_opt[i] = Z[i];\n');
+fprintf(fileID,'\t\tu_opt[i] = Y_new[i];\n');
 fprintf(fileID,'\t}\n');
 
 

@@ -1,4 +1,4 @@
-#define n_iter    40
+#define n_iter    500
 #define n_states  20
 #define m_inputs  10
 #define n_opt_var 100
