@@ -1,4 +1,4 @@
-function [model, design] = model_generator(design)
+function [model, model_c, design] = model_generator(design)
 N_carts=10;
 Ts = design.Ts;
 
@@ -55,11 +55,5 @@ system = ss(A,B,C,D);
 descrete_system = c2d(system,Ts);
 
 model = descrete_system;
-
-%[A,B,C,D] = ssdata(descrete_system); 
-
-% Initial conditions
-%X = 0.01*rand(1, N*2);
-
-% Input
-%F = 0.05*ones(1, N);
+model_c = system;
+end

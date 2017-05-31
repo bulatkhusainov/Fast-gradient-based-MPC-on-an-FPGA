@@ -1,4 +1,4 @@
-function [qp_problem] = qp_generator(current_design, model)
+function [qp_problem] = qp_generator(current_design, model, model_c)
     A = model.a;
     B = model.b;
     N = current_design.N;
@@ -6,12 +6,17 @@ function [qp_problem] = qp_generator(current_design, model)
     m = size(B,2); %number of model inputs
     n = size(A,1); %number of states/outputs
     
+    % calculating discrete penalties
+    Q_c = 1*eye(n);
+    R_c = 0.001*eye(m);
+    [ ~,~,~, Q, R ] = custom_lrqd(model_c.a,model_c.b,Q_c,R_c,current_design.Ts);
+    Q_c_term = Q;
+    
     % define upper and lower bounds on inputs
     qp_problem.b_upper = kron(ones(1,N),0.2*ones(1, m));
     qp_problem.b_lower = kron(ones(1,N),-0.2*ones(1, m));
     
-    %precalculating matrices
-
+    %precalculating prediction matrices
     A_big = zeros(0);
     for i=0:N
         A_big = [A_big; A^i];
@@ -31,14 +36,14 @@ function [qp_problem] = qp_generator(current_design, model)
 
 
     % penalty matrices
-    Q = 1*eye(n);
+
     qp_problem.Q = Q;
     qp_problem.Q_term = Q;
     Q_big = kron(eye(N), Q);
-    Q_big = blkdiag(Q_big, Q);
+    Q_big = blkdiag(Q_big, Q_c_term);
     qp_problem.Q_big = Q_big;
 
-    R = 0.001*eye(m);
+
     qp_problem.R = R;
     R_big = kron(eye(N), R);
     qp_problem.R_big = R_big;

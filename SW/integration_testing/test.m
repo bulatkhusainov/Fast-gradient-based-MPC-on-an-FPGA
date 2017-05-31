@@ -10,7 +10,7 @@ x_hat = a + (b-a).*rand(1,current_design.n_states);
 x_hat = x_hat';
 
 
-N_sim = 500; % number of simulation points
+N_sim = 2000; % number of simulation points
 x = x_hat;
 x_store = zeros(current_design.n_states ,N_sim);
 u_store = zeros(current_design.m_inputs ,N_sim);

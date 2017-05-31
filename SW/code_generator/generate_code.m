@@ -1,6 +1,6 @@
 %% it is assumed that design parameters are in the workspace
 current_design.Ts = 0.05; % sampling time
-current_design.N = 20; % horizon length
+current_design.N = 5; % horizon length
 current_design.n_bits_integer = 8; % number of integer bits
 current_design.n_bits_fraction = 10; % number of fraction bits 
 current_design.clock_target_freq = 100;
@@ -8,9 +8,9 @@ current_design.n_iter = 100;	% number of FGM iterations (required for PIL)
 
 %% calculate problem data based on design parameters
 % generate LTI SS model
-[model, current_design]= model_generator(current_design);
+[model, model_c, current_design]= model_generator(current_design);
 % formulate a QP by condensing
-qp_problem = qp_generator(current_design, model);
+qp_problem = qp_generator(current_design, model, model_c);
 % save data to matlab workspace
 save ../src/prob_data.m model qp_problem current_design
 
