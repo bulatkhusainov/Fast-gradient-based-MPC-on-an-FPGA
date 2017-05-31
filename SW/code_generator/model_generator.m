@@ -2,9 +2,9 @@ function [model, design] = model_generator(design)
 N_carts=10;
 Ts = design.Ts;
 
-design.N_states = N_carts*2;
-design.N_inputs = N_carts;
-design.N_variables = design.N*design.N_inputs;
+design.n_states = N_carts*2;
+design.m_inputs = N_carts;
+design.n_variables = design.N*design.m_inputs;
 
 % k = 1*ones(1,N_carts); % spring constants
 % b = 0.2*ones(1,N_carts); % damping constants

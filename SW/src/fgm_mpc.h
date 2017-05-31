@@ -1,9 +1,10 @@
-#define n_iter    500
+#define n_iter    100
 #define n_states  20
 #define m_inputs  10
-#define n_opt_var 100
-#define N         10
+#define n_opt_var 200
+#define N         20
 
 typedef float d_fgm;
 
 void fgm_mpc(d_fgm x_hat[n_states], d_fgm u_opt[n_opt_var]);
+

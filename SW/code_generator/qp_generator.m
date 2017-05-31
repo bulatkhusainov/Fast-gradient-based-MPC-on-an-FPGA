@@ -3,12 +3,12 @@ function [qp_problem] = qp_generator(current_design, model)
     B = model.b;
     N = current_design.N;
         
-    l = size(B,2); %number of model inputs
+    m = size(B,2); %number of model inputs
     n = size(A,1); %number of states/outputs
     
     % define upper and lower bounds on inputs
-    qp_problem.b_upper = kron(ones(1,N),10*ones(1, l));
-    qp_problem.b_lower = kron(ones(1,N),-10*ones(1, l));
+    qp_problem.b_upper = kron(ones(1,N),0.2*ones(1, m));
+    qp_problem.b_lower = kron(ones(1,N),-0.2*ones(1, m));
     
     %precalculating matrices
 
@@ -25,20 +25,20 @@ function [qp_problem] = qp_generator(current_design, model)
     B_big = [];
     for i=0:(N-1)
         shifted = circshift(B_inter,[i*n,0]);
-        shifted(1:i*n, :) = zeros(i*n, l);
+        shifted(1:i*n, :) = zeros(i*n, m);
         B_big = [B_big shifted];
     end
 
 
     % penalty matrices
-    Q = eye(n);
+    Q = 1*eye(n);
     qp_problem.Q = Q;
     qp_problem.Q_term = Q;
     Q_big = kron(eye(N), Q);
     Q_big = blkdiag(Q_big, Q);
     qp_problem.Q_big = Q_big;
 
-    R = 0.01*eye(l);
+    R = 0.001*eye(m);
     qp_problem.R = R;
     R_big = kron(eye(N), R);
     qp_problem.R_big = R_big;
