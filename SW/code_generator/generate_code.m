@@ -5,6 +5,7 @@ current_design.n_bits_integer = 8; % number of integer bits
 current_design.n_bits_fraction = 10; % number of fraction bits 
 current_design.clock_target_freq = 100;
 current_design.n_iter = 100;	% number of FGM iterations (required for PIL)
+current_design.q_ratio = 2; % ratio of the weights position/velocity
 
 %% calculate problem data based on design parameters
 % generate LTI SS model
@@ -112,14 +113,14 @@ fprintf(fileID,'\t\t{\n');
 fprintf(fileID,'\t\t\tY_new[i] = beta_plus * Z_new[i] - beta_var * Z[i];		\n');
 fprintf(fileID,'\t\t}\n\n');
 
-fprintf(fileID,'\t\t//iter_error = 0;\n');
+fprintf(fileID,'\t\titer_error = 0;\n');
 fprintf(fileID,'\t\tupdate_loop: for(i=0; i < n_opt_var; i++)\n');
 fprintf(fileID,'\t\t{\n');
-fprintf(fileID,'\t\t\t//iter_error += fabs(Y[i] - Y_new[i]);\n');
+fprintf(fileID,'\t\t\titer_error += fabs(Y[i] - Y_new[i]);\n');
 fprintf(fileID,'\t\t\tZ[i] = Z_new[i];\n');
 fprintf(fileID,'\t\t\tY[i] = Y_new[i];\n');
 fprintf(fileID,'\t\t}\n');
-fprintf(fileID,'\t\t//printf("error[%%d] = %%f \\n",k,iter_error);\n');
+fprintf(fileID,'\t\tprintf("error[%%d] = %%f \\n",k,iter_error);\n');
 fprintf(fileID,'\t}\n\n');
 
 fprintf(fileID,'\toutput_loop: for(i=0; i < n_opt_var; i++)\n');

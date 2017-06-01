@@ -1,4 +1,4 @@
-tmp_str = 'mex mex_fgm_mpc.c ../src/fgm_mpc.c';
+tmp_str = 'mex mex_fgm_mpc.c ../src/user_fgm_mpc.c';
 eval(tmp_str); % compile mex file
 
 % open lopp test

@@ -1,8 +1,8 @@
-#define n_iter    100
+#define n_iter    300
 #define n_states  20
 #define m_inputs  10
-#define n_opt_var 50
-#define N         5
+#define n_opt_var 200
+#define N         20
 
 typedef float d_fgm;
 

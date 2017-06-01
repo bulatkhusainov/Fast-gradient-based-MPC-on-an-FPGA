@@ -10,10 +10,10 @@ cd ../HIL_testing
 load ../src/prob_data.mat
 
 %% copy C code into a relevant protoip project
-files_to_copy = {'fgm_mpc.c', 'fgm_mpc.h'};
+files_to_copy = {'user_fgm_mpc.c', 'user_fgm_mpc.h'};
 for i = files_to_copy
     current_name = i{:};
-    copyfile(strcat('../src/user_',current_name),strcat('protoip_project/soc_prototype/src/user_',current_name));
+    copyfile(strcat('../src/',current_name),strcat('protoip_project/soc_prototype/src/',current_name));
 end
 
 

@@ -6,8 +6,8 @@ function [qp_problem] = qp_generator(current_design, model, model_c)
     m = size(B,2); %number of model inputs
     n = size(A,1); %number of states/outputs
     
-    % calculating discrete penalties
-    Q_c = 1*eye(n);
+    % calculating discrete penalties from continious
+    Q_c = kron(eye(n/2), diag([1, current_design.q_ratio]));
     R_c = 0.001*eye(m);
     [ ~,~,~, Q, R ] = custom_lrqd(model_c.a,model_c.b,Q_c,R_c,current_design.Ts);
     Q_c_term = Q;
