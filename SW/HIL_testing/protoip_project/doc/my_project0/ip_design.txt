@@ -1,0 +1,68 @@
+---------------------------------------------------------
+Input and output vectors:
+---------------------------------------------------------
+
+Name			| Direction		| Number of data 			| Data representation
+
+x_in			 	| Input         | X_IN_IN_LENGTH=5 			|data type "data_t_x_in_in" is floating-point single precision (32 bits)
+y_out			 	| Output         | Y_OUT_OUT_LENGTH=5 			|data type "data_t_y_out_in" is floating-point single precision (32 bits)
+
+
+---------------------------------------------------------
+IP design C/RTL test(s): input and output vectors has been mapped into a virtual memory at the following addresses:
+(the virtual memory is used by foo_test.cpp)
+---------------------------------------------------------
+
+Name			| Base address in Byte
+
+x_in			 	| 0x00000000 <- 0
+y_out			 	| 0x00000014 <- (X_IN_IN_LENGTH)*4
+
+
+---------------------------------------------------------
+IP build report: my_project0
+----------------------------------------------------------
+
+
+Timing:
+------------------------
+
+* IP
+   target clock period (ns): 10.00
+   estimated clock period (ns): 8.75
+
+	* User function
+	   target clock period (ns): 10.00
+	   estimated clock period (ns): 4.64
+
+Time constraints might be met during IP prototyping. You can reduce clock target period to build a faster design.
+
+
+Latency:
+------------------------
+
+* IP
+   latency (clock cycles): 30
+   latency (us): 0.3
+
+	* User function
+	   latency (clock cycles): 1
+	   latency (us): 0.01
+
+
+Resource utilization:
+------------------------
+
+* IP
+   BRAM_18K: 2 (0%) used out off 280 available.
+   DSP48E: 0 (0%) used out off 220 available.
+   FF: 989 (0%) used out off 106400 available.
+   LUT: 1112 (2%) used out off 53200 available.
+
+	* User function
+	   BRAM_18K: 0 (0%) used out off 280 available.
+	   DSP48E: 0 (0%) used out off 220 available.
+	   FF: 2 (0%) used out off 106400 available.
+	   LUT: 15 (0%) used out off 53200 available.
+
+NOTE: IP design performance might be enhanced by adding directives from Vivado_HLS GUI interface. Run "tclapp::icl::protoip::ip_design_build_debug" to open my_project0 with Vivado_HLS GUI interface.

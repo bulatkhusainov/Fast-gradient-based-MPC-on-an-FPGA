@@ -12,11 +12,11 @@ current_design.n_iter = 100;	% number of FGM iterations (required for PIL)
 % formulate a QP by condensing
 qp_problem = qp_generator(current_design, model, model_c);
 % save data to matlab workspace
-save ../src/prob_data.m model qp_problem current_design
+save ../src/prob_data.mat model model_c qp_problem current_design 
 
 %% generate C code for a SW implementation
 % header file
-fileID = fopen('../src/fgm_mpc.h','w');
+fileID = fopen('../src/user_fgm_mpc.h','w');
 
 fprintf(fileID,'#define n_iter    %d\n', current_design.n_iter);
 fprintf(fileID,'#define n_states  %d\n', size(model.a,1));
@@ -31,11 +31,11 @@ fprintf(fileID,'void fgm_mpc(d_fgm x_hat[n_states], d_fgm u_opt[n_opt_var]);\n\n
 fclose(fileID);
 
 % C file
-fileID = fopen('../src/fgm_mpc.c','w');
+fileID = fopen('../src/user_fgm_mpc.c','w');
 
-fprintf(fileID,'#include "fgm_mpc.h"\n');
+fprintf(fileID,'#include "user_fgm_mpc.h"\n');
 fprintf(fileID,'#include "math.h"\n');
-fprintf(fileID,'#include "mex.h"\n\n');
+fprintf(fileID,'//#include "mex.h"\n\n');
 
 fprintf(fileID,'void fgm_mpc(d_fgm x_hat[n_states], d_fgm u_opt[n_opt_var])\n');
 fprintf(fileID,'{\n');
@@ -112,14 +112,14 @@ fprintf(fileID,'\t\t{\n');
 fprintf(fileID,'\t\t\tY_new[i] = beta_plus * Z_new[i] - beta_var * Z[i];		\n');
 fprintf(fileID,'\t\t}\n\n');
 
-fprintf(fileID,'\t\titer_error = 0;\n');
+fprintf(fileID,'\t\t//iter_error = 0;\n');
 fprintf(fileID,'\t\tupdate_loop: for(i=0; i < n_opt_var; i++)\n');
 fprintf(fileID,'\t\t{\n');
-fprintf(fileID,'\t\t\titer_error += fabs(Y[i] - Y_new[i]);\n');
+fprintf(fileID,'\t\t\t//iter_error += fabs(Y[i] - Y_new[i]);\n');
 fprintf(fileID,'\t\t\tZ[i] = Z_new[i];\n');
 fprintf(fileID,'\t\t\tY[i] = Y_new[i];\n');
 fprintf(fileID,'\t\t}\n');
-%fprintf(fileID,'\t\tprintf("error[%%d] = %%f \\n",k,iter_error);\n');
+fprintf(fileID,'\t\t//printf("error[%%d] = %%f \\n",k,iter_error);\n');
 fprintf(fileID,'\t}\n\n');
 
 fprintf(fileID,'\toutput_loop: for(i=0; i < n_opt_var; i++)\n');

@@ -1,6 +1,6 @@
-#include "fgm_mpc.h"
+#include "user_fgm_mpc.h"
 #include "math.h"
-#include "mex.h"
+//#include "mex.h"
 
 void fgm_mpc(d_fgm x_hat[n_states], d_fgm u_opt[n_opt_var])
 {
@@ -72,13 +72,14 @@ void fgm_mpc(d_fgm x_hat[n_states], d_fgm u_opt[n_opt_var])
 			Y_new[i] = beta_plus * Z_new[i] - beta_var * Z[i];		
 		}
 
-		iter_error = 0;
+		//iter_error = 0;
 		update_loop: for(i=0; i < n_opt_var; i++)
 		{
-			iter_error += fabs(Y[i] - Y_new[i]);
+			//iter_error += fabs(Y[i] - Y_new[i]);
 			Z[i] = Z_new[i];
 			Y[i] = Y_new[i];
 		}
+		//printf("error[%d] = %f \n",k,iter_error);
 	}
 
 	output_loop: for(i=0; i < n_opt_var; i++)

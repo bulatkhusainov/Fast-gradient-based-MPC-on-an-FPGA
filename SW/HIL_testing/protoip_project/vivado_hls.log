@@ -1,0 +1,99 @@
+================================================================
+  Vivado(TM) HLS - High-Level Synthesis from C, C++ and SystemC
+  Version 2017.1
+  Build 1846317 on Fri Apr 14 19:19:38 MDT 2017
+  Copyright (C) 1986-2017 Xilinx, Inc. All Rights Reserved.
+================================================================
+INFO: [HLS 200-10] Running '/opt/Xilinx/Vivado_HLS/2017.1/bin/unwrapped/lnx64.o/vivado_hls'
+INFO: [HLS 200-10] For user 'bkhusain' on host 'bkhusain-HP-Z420-Workstation' (Linux_x86_64 version 4.4.0-78-generic) on Thu Jun 01 10:40:44 BST 2017
+INFO: [HLS 200-10] On os Ubuntu 14.04.5 LTS
+INFO: [HLS 200-10] In directory '/home/bkhusain/Desktop/FGM_co_design_2/SW/HIL_testing/protoip_project'
+INFO: [HLS 200-10] Opening and resetting project '/home/bkhusain/Desktop/FGM_co_design_2/SW/HIL_testing/protoip_project/ip_design/build/prj/my_project0'.
+INFO: [HLS 200-10] Adding design file '../../src/foo_data.h' to the project
+INFO: [HLS 200-10] Adding design file '../../src/foo_user.cpp' to the project
+INFO: [HLS 200-10] Adding design file '../../src/foo.cpp' to the project
+INFO: [HLS 200-10] Opening and resetting solution '/home/bkhusain/Desktop/FGM_co_design_2/SW/HIL_testing/protoip_project/ip_design/build/prj/my_project0/solution1'.
+INFO: [HLS 200-10] Cleaning up the solution database.
+INFO: [HLS 200-10] Setting target device to '{xc7z020clg484-1}'
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-10] Analyzing design file '../../src/foo.cpp' ... 
+INFO: [HLS 200-10] Analyzing design file '../../src/foo_user.cpp' ... 
+INFO: [HLS 200-10] Validating synthesis directives ...
+WARNING: [HLS 200-40] Directive 'PIPELINE' cannot be applied: Label 'input_cast_loop_x_in' does not exist in function 'foo'. 
+WARNING: [HLS 200-40] Directive 'PIPELINE' cannot be applied: Label 'output_cast_loop_y_out' does not exist in function 'foo'. 
+INFO: [HLS 200-111] Finished Checking Pragmas Time (s): cpu = 00:02:53 ; elapsed = 00:02:19 . Memory (MB): peak = 352.086 ; gain = 12.590 ; free physical = 23469 ; free virtual = 60608
+INFO: [HLS 200-111] Finished Linking Time (s): cpu = 00:03:04 ; elapsed = 00:02:30 . Memory (MB): peak = 352.086 ; gain = 12.590 ; free physical = 23242 ; free virtual = 60600
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms Time (s): cpu = 00:03:19 ; elapsed = 00:02:46 . Memory (MB): peak = 1088.086 ; gain = 748.590 ; free physical = 22428 ; free virtual = 59950
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability Time (s): cpu = 00:03:22 ; elapsed = 00:02:49 . Memory (MB): peak = 1163.691 ; gain = 824.195 ; free physical = 22315 ; free virtual = 59860
+INFO: [HLS 200-111] Finished Pre-synthesis Time (s): cpu = 00:03:25 ; elapsed = 00:02:52 . Memory (MB): peak = 1504.086 ; gain = 1164.590 ; free physical = 21868 ; free virtual = 59564
+INFO: [XFORM 203-811] Inferring bus burst read of length 5 on port 'memory_inout' (../../src/foo.cpp:66:3).
+INFO: [XFORM 203-811] Inferring bus burst write of length 5 on port 'memory_inout' (../../src/foo.cpp:101:3).
+INFO: [HLS 200-111] Finished Architecture Synthesis Time (s): cpu = 00:03:26 ; elapsed = 00:02:53 . Memory (MB): peak = 1515.691 ; gain = 1176.195 ; free physical = 21777 ; free virtual = 59473
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'foo' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Implementing module 'foo_user' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 173.2 seconds; current allocated memory: 1.044 GB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.03 seconds; current allocated memory: 1.044 GB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Implementing module 'foo' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'memcpy.foo(unsigned int, unsigned int, float volatile*)::x_in_in_int.memory_inout'.
+INFO: [SCHED 204-61] Pipelining result: Target II: 1, Final II: 1, Depth: 3.
+INFO: [SCHED 204-61] Pipelining loop 'memcpy.memory_inout.y_out_out_int.gep'.
+INFO: [SCHED 204-61] Pipelining result: Target II: 1, Final II: 1, Depth: 3.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 0.08 seconds; current allocated memory: 1.044 GB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.1 seconds; current allocated memory: 1.045 GB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'foo_user' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'foo_user'.
+INFO: [HLS 200-111]  Elapsed time: 0.07 seconds; current allocated memory: 1.045 GB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'foo' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-500] Setting interface mode on port 'foo/byte_x_in_in_offset' to 's_axilite & ap_none' (register).
+INFO: [RTGEN 206-500] Setting interface mode on port 'foo/byte_y_out_out_offset' to 's_axilite & ap_none' (register).
+INFO: [RTGEN 206-500] Setting interface mode on port 'foo/memory_inout' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'foo' to 's_axilite & ap_ctrl_hs'.
+INFO: [RTGEN 206-100] Bundling port 'return', 'byte_x_in_in_offset' to AXI-Lite port BUS_A.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'foo'.
+INFO: [HLS 200-111]  Elapsed time: 0.07 seconds; current allocated memory: 1.046 GB.
+INFO: [RTMG 210-278] Implementing memory 'foo_x_in_in_int_ram' using distributed RAMs with power-on initialization.
+INFO: [RTMG 210-278] Implementing memory 'foo_y_out_out_int_ram' using distributed RAMs.
+INFO: [HLS 200-111] Finished generating all RTL models Time (s): cpu = 00:03:27 ; elapsed = 00:02:54 . Memory (MB): peak = 1515.691 ; gain = 1176.195 ; free physical = 21773 ; free virtual = 59470
+INFO: [SYSC 207-301] Generating SystemC RTL for foo.
+INFO: [VHDL 208-304] Generating VHDL RTL for foo.
+INFO: [VLOG 209-307] Generating Verilog RTL for foo.
+INFO: [IMPL 213-8] Exporting RTL as an IP in IP-XACT.
+
+****** Vivado v2017.1 (64-bit)
+  **** SW Build 1846317 on Fri Apr 14 18:54:47 MDT 2017
+  **** IP Build 1846188 on Fri Apr 14 20:52:08 MDT 2017
+    ** Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+
+INFO: [Common 17-1269] XILINX_LOCAL_USER_DATA is set to 'YES', using local Tcl Store at '/home/bkhusain/.Xilinx/Vivado/2017.1/XilinxTclStore'.
+INFO: [Common 17-748] XILINX_TCLAPP_REPO is set to '/home/bkhusain/Documents/XilinxTclStore'. Refresh XilinxTclStore catalog is disabled when XILINX_TCLAPP_REPO is set.
+source run_ippack.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx/Vivado/2017.1/data/ip'.
+INFO: [Common 17-206] Exiting Vivado at Thu Jun  1 10:43:45 2017...
+INFO: [HLS 200-112] Total elapsed time: 196.26 seconds; peak allocated memory: 1.046 GB.
