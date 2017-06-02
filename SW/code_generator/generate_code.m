@@ -1,19 +1,29 @@
 %% it is assumed that design parameters are in the workspace
 current_design.Ts = 0.05; % sampling time
-current_design.N = 5; % horizon length
+current_design.N = 10; % horizon length
 current_design.n_bits_integer = 8; % number of integer bits
 current_design.n_bits_fraction = 10; % number of fraction bits 
 current_design.clock_target_freq = 100;
 current_design.n_iter = 100;	% number of FGM iterations (required for PIL)
-current_design.q_ratio = 2; % ratio of the weights position/velocity
+current_design.q_ratio = 1; % ratio of the weights position/velocity
 
 %% calculate problem data based on design parameters
 % generate LTI SS model
 [model, model_c, current_design]= model_generator(current_design);
 % formulate a QP by condensing
 qp_problem = qp_generator(current_design, model, model_c);
-% save data to matlab workspace
-save ../src/prob_data.mat model model_c qp_problem current_design 
+ 
+
+%% simulation parameters
+% initial condition
+a = -0.2; b = 0.2; % states intervals 
+sim_par.x_hat = a + (b-a).*rand(1,current_design.n_states); 
+sim_par.x_hat = sim_par.x_hat';
+sim_par.Tsim = 10.06; % simulation time
+sim_par.epsilon_settling = 0.01;
+
+%% save data from matlab workspace
+save ../src/prob_data.mat model model_c qp_problem current_design sim_par
 
 %% generate C code for a SW implementation
 % header file
@@ -113,14 +123,14 @@ fprintf(fileID,'\t\t{\n');
 fprintf(fileID,'\t\t\tY_new[i] = beta_plus * Z_new[i] - beta_var * Z[i];		\n');
 fprintf(fileID,'\t\t}\n\n');
 
-fprintf(fileID,'\t\titer_error = 0;\n');
+fprintf(fileID,'\t\t//iter_error = 0;\n');
 fprintf(fileID,'\t\tupdate_loop: for(i=0; i < n_opt_var; i++)\n');
 fprintf(fileID,'\t\t{\n');
-fprintf(fileID,'\t\t\titer_error += fabs(Y[i] - Y_new[i]);\n');
+fprintf(fileID,'\t\t\t//iter_error += fabs(Y[i] - Y_new[i]);\n');
 fprintf(fileID,'\t\t\tZ[i] = Z_new[i];\n');
 fprintf(fileID,'\t\t\tY[i] = Y_new[i];\n');
 fprintf(fileID,'\t\t}\n');
-fprintf(fileID,'\t\tprintf("error[%%d] = %%f \\n",k,iter_error);\n');
+fprintf(fileID,'\t\t//printf("error[%%d] = %%f \\n",k,iter_error);\n');
 fprintf(fileID,'\t}\n\n');
 
 fprintf(fileID,'\toutput_loop: for(i=0; i < n_opt_var; i++)\n');

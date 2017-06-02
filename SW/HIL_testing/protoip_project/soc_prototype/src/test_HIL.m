@@ -13,17 +13,27 @@ addpath('../../.metadata');
 mex FPGAclientMATLAB.c
 load_configuration_parameters(project_name)
 
+load ../../../../src/prob_data.mat
 
 rng('shuffle');
 
-for i=1:NUM_TEST
+soc_x_hat_in = (sim_par.x_hat)'; % initial condition is defined in generate_code.m
+
+% determine of remainder exists
+N_sim = floor(sim_par.Tsim/current_design.Ts);
+Ts_last = sim_par.Tsim - N_sim*current_design.Ts;
+if Ts_last > 1e-10
+    N_sim = N_sim + 1;
+end
+
+for i=1:N_sim
 	tmp_disp_str=strcat('Test number ',num2str(i));
 	disp(tmp_disp_str)
 
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%% generate random stimulus vector soc_x_hat_in. (-5<=x_hat_in <=5)
-	soc_x_hat_in=rand(1,SOC_X_HAT_IN_LENGTH)*10-5;
+	%soc_x_hat_in=rand(1,SOC_X_HAT_IN_LENGTH)*10-5;
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%save soc_x_hat_in_log
@@ -84,7 +94,18 @@ for i=1:NUM_TEST
 	% Stop Matlab timer
 	time_matlab=toc;
 	time_communication=time_matlab-time_IP;
-
+    
+   
+    
+    % apply the optimal input
+    if (i < N_sim) || (Ts_last < 1e-10)
+        soc_x_hat_in = (model.a*soc_x_hat_in' + model.b*fpga_soc_u_opt_out(1:current_design.m_inputs))';
+    else
+         % hadndle the remainder
+         model_remainder = c2d(model_c, Ts_last);
+         soc_x_hat_in = (model_remainder.a*soc_x_hat_in' + model_remainder.b*fpga_soc_u_opt_out(1:current_design.m_inputs))';         
+    end
+       
 
 	%save fpga_soc_u_opt_out_log.dat
 	if (TYPE_TEST==0)
@@ -121,6 +142,22 @@ for i=1:NUM_TEST
 %	[matlab_u_opt_out] = foo_user(project_name,x_in_in);
 
 end
+
+% print the last state
+	%save soc_x_hat_in_log
+	if (TYPE_TEST==0)
+		filename = strcat('../test/results/', project_name ,'/soc_x_hat_in_log.dat');
+	else
+		filename = strcat('../test/results/', project_name ,'/x_hat_in_log.dat');
+	end
+	fid = fopen(filename, 'a+');
+   
+	for j=1:length(soc_x_hat_in)
+		fprintf(fid, '%2.18f,',soc_x_hat_in(j));
+	end
+	fprintf(fid, '\n');
+
+	fclose(fid);
 
 
 
