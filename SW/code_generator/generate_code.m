@@ -1,11 +1,12 @@
 %% it is assumed that design parameters are in the workspace
-current_design.Ts = 0.05; % sampling time
-current_design.N = 10; % horizon length
+
+if not( exist('current_design','var') && any(strcmp('Ts',fieldnames(design))) ); current_design.Ts = 0.05; end;  % sampling time
+if not( exist('current_design','var') && any(strcmp('N',fieldnames(design))) ); current_design.N = 7; end;  % horizon length
 current_design.n_bits_integer = 8; % number of integer bits
 current_design.n_bits_fraction = 10; % number of fraction bits 
 current_design.clock_target_freq = 100;
-current_design.n_iter = 100;	% number of FGM iterations (required for PIL)
-current_design.q_ratio = 1; % ratio of the weights position/velocity
+if not( exist('current_design','var') && any(strcmp('n_iter',fieldnames(design))) ); current_design.n_iter = 100; end; % number of FGM iterations (required for PIL)
+if not( exist('current_design','var') && any(strcmp('q_ratio',fieldnames(design))) ); current_design.q_ratio = 1; end;  % ratio of the weights position/velocity
 
 %% calculate problem data based on design parameters
 % generate LTI SS model
@@ -16,10 +17,12 @@ qp_problem = qp_generator(current_design, model, model_c);
 
 %% simulation parameters
 % initial condition
-a = -0.2; b = 0.2; % states intervals 
-sim_par.x_hat = a + (b-a).*rand(1,current_design.n_states); 
-sim_par.x_hat = sim_par.x_hat';
-sim_par.Tsim = 10.06; % simulation time
+%a = -0.2; b = 0.2; % states intervals 
+%sim_par.x_hat = a + (b-a).*rand(5,current_design.n_states); 
+%sim_par.x_hat = sim_par.x_hat';
+load x_init_cond_set
+sim_par.x_hat = x_init_cond_set;
+sim_par.Tsim = 20; % simulation time
 sim_par.epsilon_settling = 0.01;
 
 %% save data from matlab workspace

@@ -1,6 +1,6 @@
 function output = query_simulation(design)
 
-%current_design = design;
+current_design = design;
 
 %% generate C code  
 cd ../code_generator
@@ -26,6 +26,6 @@ cd ../..;
 
 
 % %% calculate output data
-% output = [performance; cpu_time];
-output = 1;
+output = [settling_time; cpu_time];
+%output = 1;
 end

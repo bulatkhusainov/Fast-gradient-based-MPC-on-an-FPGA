@@ -19,8 +19,8 @@ soc_prototype_test('project_name','my_project0','board_name','zedboard','num_tes
 % copyfile('soc_prototype/test/results/my_project0/*.dat', strcat('soc_prototype/test/results/my_project0/N_',num2str(N),'_PAR_',num2str(PAR+double(logical(double(rem_partition))))));
 % delete('soc_prototype/test/results/my_project0/*.dat');
 
-% read obectives
-% performance = sum(importdata('soc_prototype/test/results/my_project0/objective.dat'));
-% tmp_vector = (importdata('soc_prototype/test/results/my_project0/fpga_time_log.dat'));
-% tmp_vector = tmp_vector.textdata;
-% cpu_time = max(str2num([tmp_vector{:}]));
+% read obectives and constraints
+settling_time = sum(importdata('soc_prototype/test/results/my_project0/settling_time.dat'));
+cpu_time = (importdata('soc_prototype/test/results/my_project0/fpga_time_log.dat'));
+cpu_time = max(str2num(cell2mat(([cpu_time.textdata]))));
+
