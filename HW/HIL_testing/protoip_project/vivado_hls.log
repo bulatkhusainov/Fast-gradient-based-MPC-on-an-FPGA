@@ -1,0 +1,137 @@
+================================================================
+  Vivado(TM) HLS - High-Level Synthesis from C, C++ and SystemC
+  Version 2017.1
+  Build 1846317 on Fri Apr 14 19:19:38 MDT 2017
+  Copyright (C) 1986-2017 Xilinx, Inc. All Rights Reserved.
+================================================================
+INFO: [HLS 200-10] Running '/opt/Xilinx/Vivado_HLS/2017.1/bin/unwrapped/lnx64.o/vivado_hls'
+INFO: [HLS 200-10] For user 'bkhusain' on host 'bkhusain-HP-Z420-Workstation' (Linux_x86_64 version 4.4.0-81-generic) on Mon Jun 26 10:49:45 BST 2017
+INFO: [HLS 200-10] On os Ubuntu 14.04.5 LTS
+INFO: [HLS 200-10] In directory '/home/bkhusain/Desktop/FGM_co_design_2/HW/HIL_testing/protoip_project'
+INFO: [HLS 200-10] Opening and resetting project '/home/bkhusain/Desktop/FGM_co_design_2/HW/HIL_testing/protoip_project/ip_design/build/prj/my_project0'.
+INFO: [HLS 200-10] Adding design file '../../src/foo_data.h' to the project
+INFO: [HLS 200-10] Adding design file '../../src/foo_user.cpp' to the project
+INFO: [HLS 200-10] Adding design file '../../src/foo.cpp' to the project
+INFO: [HLS 200-10] Opening and resetting solution '/home/bkhusain/Desktop/FGM_co_design_2/HW/HIL_testing/protoip_project/ip_design/build/prj/my_project0/solution1'.
+INFO: [HLS 200-10] Cleaning up the solution database.
+INFO: [HLS 200-10] Setting target device to '{xc7z020clg484-1}'
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-10] Analyzing design file '../../src/foo.cpp' ... 
+INFO: [HLS 200-10] Analyzing design file '../../src/foo_user.cpp' ... 
+INFO: [HLS 200-10] Analyzing design file '../../src/user_fgm_mpc.cpp' ... 
+INFO: [HLS 200-10] Validating synthesis directives ...
+WARNING: [HLS 200-40] Directive 'PIPELINE' cannot be applied: Label 'input_cast_loop_x_hat' does not exist in function 'foo'. 
+WARNING: [HLS 200-40] Directive 'PIPELINE' cannot be applied: Label 'output_cast_loop_u_opt' does not exist in function 'foo'. 
+INFO: [HLS 200-111] Finished Checking Pragmas Time (s): cpu = 00:03:04 ; elapsed = 00:02:27 . Memory (MB): peak = 354.012 ; gain = 12.590 ; free physical = 23990 ; free virtual = 61159
+INFO: [HLS 200-111] Finished Linking Time (s): cpu = 00:03:17 ; elapsed = 00:02:41 . Memory (MB): peak = 354.012 ; gain = 12.590 ; free physical = 23759 ; free virtual = 61149
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms Time (s): cpu = 00:03:41 ; elapsed = 00:03:05 . Memory (MB): peak = 1154.012 ; gain = 812.590 ; free physical = 23025 ; free virtual = 60580
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability Time (s): cpu = 00:03:44 ; elapsed = 00:03:08 . Memory (MB): peak = 1225.543 ; gain = 884.121 ; free physical = 22934 ; free virtual = 60514
+INFO: [HLS 200-111] Finished Pre-synthesis Time (s): cpu = 00:03:47 ; elapsed = 00:03:12 . Memory (MB): peak = 1461.906 ; gain = 1120.484 ; free physical = 22470 ; free virtual = 60202
+INFO: [XFORM 203-811] Inferring bus burst read of length 20 on port 'memory_inout' (../../src/foo.cpp:66:3).
+INFO: [XFORM 203-811] Inferring bus burst write of length 80 on port 'memory_inout' (../../src/foo.cpp:101:3).
+INFO: [HLS 200-111] Finished Architecture Synthesis Time (s): cpu = 00:03:48 ; elapsed = 00:03:13 . Memory (MB): peak = 1525.906 ; gain = 1184.484 ; free physical = 22378 ; free virtual = 60110
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'foo' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Implementing module 'fgm_mpc' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 192.89 seconds; current allocated memory: 1.058 GB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.13 seconds; current allocated memory: 1.058 GB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Implementing module 'foo_user' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 0.17 seconds; current allocated memory: 1.058 GB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.08 seconds; current allocated memory: 1.059 GB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Implementing module 'foo' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'memcpy.foo(unsigned int, unsigned int, float volatile*)::x_hat_in_int.memory_inout'.
+INFO: [SCHED 204-61] Pipelining result: Target II: 1, Final II: 1, Depth: 3.
+INFO: [SCHED 204-61] Pipelining loop 'memcpy.memory_inout.u_opt_out_int.gep'.
+INFO: [SCHED 204-61] Pipelining result: Target II: 1, Final II: 1, Depth: 3.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 0.18 seconds; current allocated memory: 1.059 GB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.14 seconds; current allocated memory: 1.059 GB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'fgm_mpc' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SYN 201-210] Renamed object name 'foo_faddfsub_32ns_32ns_32_5_full_dsp' to 'foo_faddfsub_32nsbkb' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'foo_fmul_32ns_32ns_32_4_max_dsp' to 'foo_fmul_32ns_32ncud' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'foo_fcmp_32ns_32ns_1_1' to 'foo_fcmp_32ns_32ndEe' due to the length limit 20
+INFO: [RTGEN 206-100] Generating core module 'foo_faddfsub_32nsbkb': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'foo_fcmp_32ns_32ndEe': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'foo_fmul_32ns_32ncud': 2 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'fgm_mpc'.
+INFO: [HLS 200-111]  Elapsed time: 0.26 seconds; current allocated memory: 1.061 GB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'foo_user' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'foo_user'.
+INFO: [HLS 200-111]  Elapsed time: 0.45 seconds; current allocated memory: 1.064 GB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'foo' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-500] Setting interface mode on port 'foo/byte_x_hat_in_offset' to 's_axilite & ap_none' (register).
+INFO: [RTGEN 206-500] Setting interface mode on port 'foo/byte_u_opt_out_offset' to 's_axilite & ap_none' (register).
+INFO: [RTGEN 206-500] Setting interface mode on port 'foo/memory_inout' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'foo' to 's_axilite & ap_ctrl_hs'.
+INFO: [RTGEN 206-100] Bundling port 'return', 'byte_x_hat_in_offset' and 'byte_u_opt_out_offset' to AXI-Lite port BUS_A.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'foo'.
+INFO: [HLS 200-111]  Elapsed time: 0.2 seconds; current allocated memory: 1.065 GB.
+INFO: [RTMG 210-279] Implementing memory 'fgm_mpc_h_x1_rom' using auto ROMs.
+INFO: [RTMG 210-279] Implementing memory 'fgm_mpc_H_diff_rom' using auto ROMs.
+INFO: [RTMG 210-279] Implementing memory 'fgm_mpc_b_upper_rom' using auto ROMs.
+INFO: [RTMG 210-279] Implementing memory 'fgm_mpc_b_lower_rom' using auto ROMs.
+INFO: [RTMG 210-278] Implementing memory 'fgm_mpc_Z_new_ram' using block RAMs.
+INFO: [RTMG 210-278] Implementing memory 'foo_x_hat_in_int_ram' using distributed RAMs with power-on initialization.
+INFO: [HLS 200-111] Finished generating all RTL models Time (s): cpu = 00:03:51 ; elapsed = 00:03:16 . Memory (MB): peak = 1525.906 ; gain = 1184.484 ; free physical = 22359 ; free virtual = 60097
+INFO: [SYSC 207-301] Generating SystemC RTL for foo.
+INFO: [VHDL 208-304] Generating VHDL RTL for foo.
+INFO: [VLOG 209-307] Generating Verilog RTL for foo.
+INFO: [IMPL 213-8] Exporting RTL as an IP in IP-XACT.
+
+****** Vivado v2017.1 (64-bit)
+  **** SW Build 1846317 on Fri Apr 14 18:54:47 MDT 2017
+  **** IP Build 1846188 on Fri Apr 14 20:52:08 MDT 2017
+    ** Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+
+INFO: [Common 17-1269] XILINX_LOCAL_USER_DATA is set to 'YES', using local Tcl Store at '/home/bkhusain/.Xilinx/Vivado/2017.1/XilinxTclStore'.
+INFO: [Common 17-748] XILINX_TCLAPP_REPO is set to '/home/bkhusain/Documents/XilinxTclStore'. Refresh XilinxTclStore catalog is disabled when XILINX_TCLAPP_REPO is set.
+source run_ippack.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx/Vivado/2017.1/data/ip'.
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'foo_ap_fmul_2_max_dsp_32'...
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'foo_ap_fmul_2_max_dsp_32'...
+WARNING: [IP_Flow 19-4832] The IP name 'foo_ap_faddfsub_3_full_dsp_32' you have specified is long. The Windows operating system has path length limitations. It is recommended you use shorter names to reduce the likelihood of issues.
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'foo_ap_faddfsub_3_full_dsp_32'...
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'foo_ap_faddfsub_3_full_dsp_32'...
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'foo_ap_fcmp_0_no_dsp_32'...
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'foo_ap_fcmp_0_no_dsp_32'...
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx/Vivado/2017.1/data/ip'.
+INFO: [Common 17-206] Exiting Vivado at Mon Jun 26 10:53:16 2017...
+INFO: [HLS 200-112] Total elapsed time: 240.4 seconds; peak allocated memory: 1.065 GB.

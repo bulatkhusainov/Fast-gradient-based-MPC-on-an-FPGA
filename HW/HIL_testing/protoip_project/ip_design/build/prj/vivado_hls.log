@@ -1,0 +1,89 @@
+INFO: [HLS 200-10] Running '/opt/Xilinx/Vivado_HLS/2017.1/bin/unwrapped/lnx64.o/vivado_hls'
+INFO: [HLS 200-10] For user 'bkhusain' on host 'bkhusain-HP-Z420-Workstation' (Linux_x86_64 version 4.4.0-81-generic) on Mon Jun 26 17:00:35 BST 2017
+INFO: [HLS 200-10] On os Ubuntu 14.04.5 LTS
+INFO: [HLS 200-10] In directory '/home/bkhusain/Desktop/FGM_co_design_2/HW/HIL_testing/protoip_project/ip_design/build/prj'
+INFO: [HLS 200-10] Opening project '/home/bkhusain/Desktop/FGM_co_design_2/HW/HIL_testing/protoip_project/ip_design/build/prj/my_project0'.
+INFO: [HLS 200-10] Adding design file '../../src/foo.cpp' to the project
+INFO: [HLS 200-10] Adding design file '../../src/foo_user.cpp' to the project
+INFO: [HLS 200-10] Adding design file '../../src/foo_data.h' to the project
+INFO: [HLS 200-10] Adding design file '../../src/user_fgm_mpc.cpp' to the project
+INFO: [HLS 200-10] Opening solution '/home/bkhusain/Desktop/FGM_co_design_2/HW/HIL_testing/protoip_project/ip_design/build/prj/my_project0/solution1'.
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-10] Setting target device to 'xc7z020clg484-1'
+INFO: [HLS 200-10] Analyzing design file '../../src/user_fgm_mpc.cpp' ... 
+WARNING: [HLS 200-40] In file included from /home/bkhusain/Desktop/FGM_co_design_2/HW/HIL_testing/protoip_project/ip_design/build/prj/my_project0/solution1/.autopilot/db/user_fgm_mpc.pragma.1.cpp:1:
+In file included from ../../src/user_fgm_mpc.cpp:1:
+In file included from ../../src/user_fgm_mpc.cpp:1:
+In file included from ../../src/user_fgm_mpc.h:17:
+In file included from ../../src/foo_data.h:21:
+In file included from /opt/Xilinx/Vivado_HLS/2017.1/common/technology/autopilot/hls_math.h:295:
+/opt/Xilinx/Vivado_HLS/2017.1/common/technology/autopilot/hls/hls_fmod_rem_quo.h:43:15: error: expected ',' or '>' in template-parameter-list
+template <int 8,int S>
+              ^
+/opt/Xilinx/Vivado_HLS/2017.1/common/technology/autopilot/hls/hls_fmod_rem_quo.h:43:16: error: expected unqualified-id
+template <int 8,int S>
+               ^
+/opt/Xilinx/Vivado_HLS/2017.1/common/technology/autopilot/hls/hls_fmod_rem_quo.h:751:17: error: no member named 'generic_fmod' in namespace 'hls::fmdrmd'
+ return fmdrmd::generic_fmod<double>(x,y);
+        ~~~~~~~~^
+/opt/Xilinx/Vivado_HLS/2017.1/common/technology/autopilot/hls/hls_fmod_rem_quo.h:751:36: error: expected '(' for function-style cast or type construction
+ return fmdrmd::generic_fmod<double>(x,y);
+                             ~~~~~~^
+/opt/Xilinx/Vivado_HLS/2017.1/common/technology/autopilot/hls/hls_fmod_rem_quo.h:754:17: error: no member named 'generic_fmod_mult' in namespace 'hls::fmdrmd'
+ return fmdrmd::generic_fmod_mult<float>(x,y);
+        ~~~~~~~~^
+/opt/Xilinx/Vivado_HLS/2017.1/common/technology/autopilot/hls/hls_fmod_rem_quo.h:754:40: error: expected '(' for function-style cast or type construction
+ return fmdrmd::generic_fmod_mult<float>(x,y);
+                                  ~~~~~^
+/opt/Xilinx/Vivado_HLS/2017.1/common/technology/autopilot/hls/hls_fmod_rem_quo.h:757:17: error: no member named 'generic_fmod' in namespace 'hls::fmdrmd'
+ return fmdrmd::generic_fmod<half>(x,y);
+        ~~~~~~~~^
+/opt/Xilinx/Vivado_HLS/2017.1/common/technology/autopilot/hls/hls_fmod_rem_quo.h:757:30: error: unexpected type name 'half': expected expression
+ return fmdrmd::generic_fmod<half>(x,y);
+                             ^
+/opt/Xilinx/Vivado_HLS/2017.1/common/technology/autopilot/hls/hls_fmod_rem_quo.h:767:17: error: no member named 'generic_remainder' in namespace 'hls::fmdrmd'
+ return fmdrmd::generic_remainder<double>(x,y);
+        ~~~~~~~~^
+/opt/Xilinx/Vivado_HLS/2017.1/common/technology/autopilot/hls/hls_fmod_rem_quo.h:767:41: error: expected '(' for function-style cast or type construction
+ return fmdrmd::generic_remainder<double>(x,y);
+                                  ~~~~~~^
+/opt/Xilinx/Vivado_HLS/2017.1/common/technology/autopilot/hls/hls_fmod_rem_quo.h:770:17: error: no member named 'generic_remainder' in namespace 'hls::fmdrmd'
+ return fmdrmd::generic_remainder<float>(x,y);
+        ~~~~~~~~^
+/opt/Xilinx/Vivado_HLS/2017.1/common/technology/autopilot/hls/hls_fmod_rem_quo.h:770:40: error: expected '(' for function-style cast or type construction
+ return fmdrmd::generic_remainder<float>(x,y);
+                                  ~~~~~^
+/opt/Xilinx/Vivado_HLS/2017.1/common/technology/autopilot/hls/hls_fmod_rem_quo.h:773:17: error: no member named 'generic_remainder' in namespace 'hls::fmdrmd'
+ return fmdrmd::generic_remainder<half>(x,y);
+        ~~~~~~~~^
+/opt/Xilinx/Vivado_HLS/2017.1/common/technology/autopilot/hls/hls_fmod_rem_quo.h:773:35: error: unexpected type name 'half': expected expression
+ return fmdrmd::generic_remainder<half>(x,y);
+                                  ^
+/opt/Xilinx/Vivado_HLS/2017.1/common/technology/autopilot/hls/hls_fmod_rem_quo.h:783:17: error: no member named 'generic_remquo' in namespace 'hls::fmdrmd'
+ return fmdrmd::generic_remquo<double>(x,y, quo);
+        ~~~~~~~~^
+/opt/Xilinx/Vivado_HLS/2017.1/common/technology/autopilot/hls/hls_fmod_rem_quo.h:783:38: error: expected '(' for function-style cast or type construction
+ return fmdrmd::generic_remquo<double>(x,y, quo);
+                               ~~~~~~^
+/opt/Xilinx/Vivado_HLS/2017.1/common/technology/autopilot/hls/hls_fmod_rem_quo.h:786:17: error: no member named 'generic_remquo' in namespace 'hls::fmdrmd'
+ return fmdrmd::generic_remquo<float>(x,y, quo);
+        ~~~~~~~~^
+/opt/Xilinx/Vivado_HLS/2017.1/common/technology/autopilot/hls/hls_fmod_rem_quo.h:786:37: error: expected '(' for function-style cast or type construction
+ return fmdrmd::generic_remquo<float>(x,y, quo);
+                               ~~~~~^
+/opt/Xilinx/Vivado_HLS/2017.1/common/technology/autopilot/hls/hls_fmod_rem_quo.h:789:17: error: no member named 'generic_remquo' in namespace 'hls::fmdrmd'
+ return fmdrmd::generic_remquo<half>(x,y, quo);
+        ~~~~~~~~^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+Compilation of the preprocessed source 'user_fgm_mpc.g' failed
+    while executing
+"source /home/bkhusain/Desktop/FGM_co_design_2/HW/HIL_testing/protoip_project/ip_design/build/prj/my_project0/solution1/csynth.tcl"
+    invoked from within
+"hls::main /home/bkhusain/Desktop/FGM_co_design_2/HW/HIL_testing/protoip_project/ip_design/build/prj/my_project0/solution1/csynth.tcl"
+    ("uplevel" body line 1)
+    invoked from within
+"uplevel 1 hls::main {*}$args"
+    (procedure "hls_proc" line 5)
+    invoked from within
+"hls_proc $argv"
