@@ -9,6 +9,7 @@ cd ../HIL_testing
 
 load ../src/prob_data.mat
 
+
 %% copy C code into a relevant protoip project
 files_to_copy = {'user_fgm_mpc.c', 'user_fgm_mpc.h'};
 for i = files_to_copy
@@ -22,10 +23,12 @@ end
 protoip_dir = strcat('protoip_project');
 cd(protoip_dir);
 run_protoip_project;
-cd ../..;
+cd ../;
 
 
 % %% calculate output data
-output = [settling_time; cpu_time];
+output = [settling_time; cpu_time; (cpu_time - current_design.Ts) ];
 %output = 1;
+
+
 end

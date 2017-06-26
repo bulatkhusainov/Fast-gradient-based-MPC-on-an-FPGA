@@ -1,3 +1,4 @@
+
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % icl::protoip
 % Authors: asuardi <https://github.com/asuardi>, bulatkhusainov <https://github.com/bulatkhusainov
@@ -29,7 +30,7 @@ end
 
 for k = 1:size(sim_par.x_hat,2) % perform simulations was several initial conditions
     soc_x_hat_in = (sim_par.x_hat(1:end,k))'; % initial condition is defined in generate_code.m
-    settling_time = 100; % this value will be used in case if system does not settle
+    settling_time = sim_par.Tsim; % this value will be used in case if system does not settle
     system_settled = 0;
 
     for i=1:N_sim
@@ -127,7 +128,9 @@ for k = 1:size(sim_par.x_hat,2) % perform simulations was several initial condit
         else
              % hadndle the remainder
              model_remainder = c2d(model_c, Ts_last);
-             soc_x_hat_in = (model_remainder.a*soc_x_hat_in' + model_remainder.b*fpga_soc_u_opt_out(1:current_design.m_inputs))';         
+             soc_x_hat_in = (model_remainder.a*soc_x_hat_in' + model_remainder.b*fpga_soc_u_opt_out(1:current_design.m_inputs))';     
+             
+             % do not check system settling in the remainder
         end
 
 
