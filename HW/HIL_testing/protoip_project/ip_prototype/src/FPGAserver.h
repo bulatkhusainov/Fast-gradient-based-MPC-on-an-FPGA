@@ -12,13 +12,13 @@
 ////////////////////////////////////////////////////////////
 // Define FLOAT_FIX_VECTOR_NAME=1 to enable  fixed-point (up to 32 bits word length) arithmetic precision or 
 // FLOAT_FIX_VECTOR_NAME=0 to enable floating-point single arithmetic precision.
-#define FLOAT_FIX_X_HAT_IN 0
-#define FLOAT_FIX_U_OPT_OUT 0
+#define FLOAT_FIX_X_HAT_IN 1
+#define FLOAT_FIX_U_OPT_OUT 1
 
 //Input vectors FRACTIONLENGTH:
-#define X_HAT_IN_FRACTIONLENGTH 0
+#define X_HAT_IN_FRACTIONLENGTH 15
 //Output vectors FRACTIONLENGTH:
-#define U_OPT_OUT_FRACTIONLENGTH 0
+#define U_OPT_OUT_FRACTIONLENGTH 15
 
 ////////////////////////////////////////////////////////////
 //FPGA vectors memory maps

@@ -7,26 +7,26 @@ Input and output vectors:
 
 Name			| Direction		| Number of data 			| Data representation
 
-x_hat			 	| Input         | X_HAT_IN_LENGTH=20 			|data type "data_t_x_hat_in" is floating-point single precision (32 bits)
-u_opt			 	| Output         | U_OPT_OUT_LENGTH=80 			|data type "data_t_u_opt_in" is floating-point single precision (32 bits)
+x_hat			 	| Input         | X_HAT_IN_LENGTH=20 			|data type "data_t_x_hat_in" is fixed-point: X_HAT_IN_INTEGERLENGTH=5  bits integer length, X_HAT_IN_FRACTIONLENGTH=15  bits fraction length
+u_opt			 	| Output         | U_OPT_OUT_LENGTH=80 			|data type "data_t_u_opt_in" is fixed-point: U_OPT_OUT_INTEGERLENGTH=5  bits integer length, U_OPT_OUT_FRACTIONLENGTH=15  bits fraction length
 
 NOTES: 1) the following constants are defined in ip_design/src/foo_data.h and are used by ip_design/src/foo.cpp, ip_design/src/foo_user.cpp and ip_design/src/foo_test.cpp
        2) ip_design/src/foo_data.h is generated automatically, please do not edit manually.
 
 // FLOAT_FIX_VECTOR_NAME=1 to enable  fixed-point (up to 32 bits word length) arithmetic precision or 
 // FLOAT_FIX_VECTOR_NAME=0 to enable floating-point single arithmetic precision.
-FLOAT_FIX_X_HAT_IN=0
-FLOAT_FIX_U_OPT_OUT=0
+FLOAT_FIX_X_HAT_IN=1
+FLOAT_FIX_U_OPT_OUT=1
 
 // Input vectors INTEGERLENGTH:
-X_HAT_IN_INTEGERLENGTH=0
+X_HAT_IN_INTEGERLENGTH=5
 // Output vectors INTEGERLENGTH:
-U_OPT_OUT_INTEGERLENGTH=0
+U_OPT_OUT_INTEGERLENGTH=5
 
 // Input vectors FRACTIONLENGTH:
-X_HAT_IN_FRACTIONLENGTH=0
+X_HAT_IN_FRACTIONLENGTH=15
 // Output vectors FRACTIONLENGTH:
-U_OPT_OUT_FRACTIONLENGTH=0
+U_OPT_OUT_FRACTIONLENGTH=15
 
 //Input vectors size:
 X_HAT_IN_LENGTH=20

@@ -32,15 +32,28 @@ save ../src/prob_data.mat model model_c qp_problem current_design sim_par
 % header file
 fileID = fopen('../src/user_fgm_mpc.h','w');
 
+fprintf(fileID,'#ifndef USER_FGM_MPC \n');
+fprintf(fileID,'#define USER_FGM_MPC \n\n');
+
+
 fprintf(fileID,'#define n_iter    %d\n', current_design.n_iter);
 fprintf(fileID,'#define n_states  %d\n', size(model.a,1));
 fprintf(fileID,'#define m_inputs  %d\n', size(model.b,2));
 fprintf(fileID,'#define n_opt_var %d\n', current_design.N*size(model.b,2));
-fprintf(fileID,'#define N         %d\n\n', current_design.N);
+fprintf(fileID,'//#define N         %d\n\n', current_design.N);
 
-fprintf(fileID,'typedef float d_fgm;\n\n');
+fprintf(fileID,'#include "user_protoip_definer.h"\n');
+fprintf(fileID,'#ifdef PROTOIP\n');
+fprintf(fileID,'\t#include "foo_data.h"\n');
+fprintf(fileID,'\ttypedef data_t_x_hat_in d_fgm;\n');
+fprintf(fileID,'#else\n');
+fprintf(fileID,'\ttypedef float d_fgm;\n');
+fprintf(fileID,'#endif\n\n');
+
 
 fprintf(fileID,'void fgm_mpc(d_fgm x_hat[n_states], d_fgm u_opt[n_opt_var]);\n\n');
+
+fprintf(fileID,'#endif \n');
 
 fclose(fileID);
 

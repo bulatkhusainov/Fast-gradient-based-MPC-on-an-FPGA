@@ -1,22 +1,22 @@
 % figure out vector interfaces length
-x_hat_in = strcat('x_hat:',num2str(current_design.n_states),':float');
-u_opt_out = strcat('u_opt:',num2str(current_design.N*size(model.b,2)),':float');
+x_hat_in = strcat('x_hat:',num2str(current_design.n_states),':fix:5:15');
+u_opt_out = strcat('u_opt:',num2str(current_design.N*size(model.b,2)),':fix:5:15');
  
 % delete previous test files
-%delete('ip_prototype/test/results/my_project0/*.dat');
+delete('ip_prototype/test/results/my_project0/*.dat');
 
 
 %ip_design_build('project_name','my_project0', 'input', x_hat_in, 'output', u_opt_out);
 
-ip_design_build_debug('project_name','my_project0');
+%ip_design_build_debug('project_name','my_project0');
 
-%ip_prototype_build('project_name','my_project0','board_name','zedboard');
+ip_prototype_build('project_name','my_project0','board_name','zedboard');
 
-%ip_prototype_load('project_name','my_project0','board_name','zedboard','type_eth','udp');
+ip_prototype_load('project_name','my_project0','board_name','zedboard','type_eth','udp');
 
 %ip_prototype_load_debug('project_name','my_project0','board_name','zedboard')
 
-%ip_prototype_test('project_name','my_project0','board_name','zedboard','num_test',1);
+ip_prototype_test('project_name','my_project0','board_name','zedboard','num_test',1);
 
 
 % mkdir(strcat('soc_prototype/test/results/my_project0/PAR_',num2str(PAR)));
