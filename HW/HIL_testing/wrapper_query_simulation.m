@@ -6,6 +6,7 @@ design.Ts = x(1);
 design.N = x(2);
 design.n_iter = x(3);
 design.q_ratio = x(4);
+design.n_bits_fraction = x(5);
 
 output = query_simulation(design);
 

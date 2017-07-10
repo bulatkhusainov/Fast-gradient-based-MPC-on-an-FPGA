@@ -27,9 +27,9 @@
 #define FLOAT_FIX_U_OPT_OUT 1
 
 //Input vectors INTEGERLENGTH:
-#define X_HAT_IN_INTEGERLENGTH 5
+#define X_HAT_IN_INTEGERLENGTH 4
 //Output vectors INTEGERLENGTH:
-#define U_OPT_OUT_INTEGERLENGTH 5
+#define U_OPT_OUT_INTEGERLENGTH 4
 
 
 //Input vectors FRACTIONLENGTH:
@@ -41,7 +41,7 @@
 //Input vectors size:
 #define X_HAT_IN_LENGTH 20
 //Output vectors size:
-#define U_OPT_OUT_LENGTH 80
+#define U_OPT_OUT_LENGTH 70
 
 
 
@@ -50,16 +50,16 @@ typedef uint32_t data_t_memory;
 
 
 #if FLOAT_FIX_X_HAT_IN == 1
-	typedef ap_fixed<X_HAT_IN_INTEGERLENGTH+X_HAT_IN_FRACTIONLENGTH,X_HAT_IN_INTEGERLENGTH,AP_TRN_ZERO,AP_SAT> data_t_x_hat_in;
-	typedef ap_fixed<32,32-X_HAT_IN_FRACTIONLENGTH,AP_TRN_ZERO,AP_SAT> data_t_interface_x_hat_in;
+	typedef ap_fixed<X_HAT_IN_INTEGERLENGTH+X_HAT_IN_FRACTIONLENGTH,X_HAT_IN_INTEGERLENGTH,AP_TRN,AP_WRAP> data_t_x_hat_in;
+	typedef ap_fixed<32,32-X_HAT_IN_FRACTIONLENGTH,AP_TRN,AP_WRAP> data_t_interface_x_hat_in;
 #endif
 #if FLOAT_FIX_X_HAT_IN == 0
 	typedef float data_t_x_hat_in;
 	typedef float data_t_interface_x_hat_in;
 #endif
 #if FLOAT_FIX_U_OPT_OUT == 1 
-	typedef ap_fixed<U_OPT_OUT_INTEGERLENGTH+U_OPT_OUT_FRACTIONLENGTH,U_OPT_OUT_INTEGERLENGTH,AP_TRN_ZERO,AP_SAT> data_t_u_opt_out;
-	typedef ap_fixed<32,32-U_OPT_OUT_FRACTIONLENGTH,AP_TRN_ZERO,AP_SAT> data_t_interface_u_opt_out;
+	typedef ap_fixed<U_OPT_OUT_INTEGERLENGTH+U_OPT_OUT_FRACTIONLENGTH,U_OPT_OUT_INTEGERLENGTH,AP_TRN,AP_WRAP> data_t_u_opt_out;
+	typedef ap_fixed<32,32-U_OPT_OUT_FRACTIONLENGTH,AP_TRN,AP_WRAP> data_t_interface_u_opt_out;
 #endif
 #if FLOAT_FIX_U_OPT_OUT == 0 
 	typedef float data_t_u_opt_out;

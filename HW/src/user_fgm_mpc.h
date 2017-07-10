@@ -4,8 +4,8 @@
 #define n_iter    100
 #define n_states  20
 #define m_inputs  10
-#define n_opt_var 80
-//#define N         8
+#define n_opt_var 70
+//#define N         7
 
 #include "user_protoip_definer.h"
 #ifdef PROTOIP

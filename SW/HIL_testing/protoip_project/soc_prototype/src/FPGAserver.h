@@ -28,7 +28,7 @@
 //SOC interface arrays lengths:
 #define SOC_X_HAT_IN_VECTOR_LENGTH 20
 
-#define SOC_U_OPT_OUT_VECTOR_LENGTH 50
+#define SOC_U_OPT_OUT_VECTOR_LENGTH 90
 ////////////////////////////////////////////////////////////
 //FPGA vectors memory maps
 #define x_in_IN_DEFINED_MEM_ADDRESS 33554432

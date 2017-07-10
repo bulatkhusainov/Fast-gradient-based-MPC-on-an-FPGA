@@ -55,39 +55,43 @@ function [qp_problem] = qp_generator(current_design, model, model_c)
     % QP matrices
     qp_problem.H = B_big'*Q_big*B_big + R_big;
     qp_problem.h_x = A_big'*Q_big*B_big; %h = X'*h_x;
-    %L=abs(max(eig(qp_problem.H)));
     
     
-    % check if convexity is preserved with fixed point aritmetic by
-    % checking minimum eigenvalue
-    mu = min(eig(double(fi(qp_problem.H, 1, current_design.n_bits_integer+current_design.n_bits_fraction,current_design.n_bits_fraction,'RoundingMethod', 'Floor'))));
-    qp_problem.mu = mu;
-    
-    % check if the max eigenvalue is leq than one
-    L = max(eig(double(fi(qp_problem.H, 1, current_design.n_bits_integer+current_design.n_bits_fraction,current_design.n_bits_fraction,'RoundingMethod', 'Floor'))));
-    a = 1/L;
-    max_eig = max(eig(double(fi(a*qp_problem.H, 1, current_design.n_bits_integer+current_design.n_bits_fraction,current_design.n_bits_fraction,'RoundingMethod', 'Floor'))));
-    while max_eig > 1
-        a = a*0.99;
-        max_eig = max(eig(double(fi(a*qp_problem.H, 1, current_design.n_bits_integer+current_design.n_bits_fraction,current_design.n_bits_fraction,'RoundingMethod', 'Floor'))));
+    % scale the Hessian matrix
+    n_bits_fraction = current_design.n_bits_fraction;
+    H_fixed = double(fi(qp_problem.H, 1, 32 , n_bits_fraction,'RoundingMethod', 'Floor'));
+    L_H_fixed = max(eig(H_fixed)); % max eigenvalue
+    a = 1/L_H_fixed;
+    L_scaled = max(eig(double(fi(a*H_fixed, 1, 32 , n_bits_fraction,'RoundingMethod', 'Floor'))));
+    while L_scaled > 1
+      % decrease scaling factor until the largest eigenvalue is
+      % smaller than or equal to 1
+      a = a*0.99;
+      L_scaled = max(eig(double(fi(a*H_fixed, 1, 32, n_bits_fraction,'RoundingMethod', 'Floor'))));
     end
-    
-    % scale Hessian and gradient matrices
+
+    H_n = a*H_fixed;
     qp_problem.h_x = a*qp_problem.h_x;
-    qp_problem.H_diff = eye(size(qp_problem.H)) - a*qp_problem.H;
+    qp_problem.H_diff_negative = -(eye(size(qp_problem.H)) - H_n);
+    
+    
+    L_scaled = max(eig(double(fi(H_n, 1, 32, n_bits_fraction,'RoundingMethod', 'Floor'))));    
+    mu_scaled = min(eig(double(fi(H_n, 1, 32, n_bits_fraction,'RoundingMethod', 'Floor')))); % min eigenvalue
+    qp_problem.mu = mu_scaled;
+    
+    if qp_problem.mu > 0 % the remaining code will not make sense if Hessian is not convex
+    
+        tmp_var = sqrt(L_scaled/mu_scaled);
 
+        beta_ideal = (tmp_var-1)/(tmp_var+1);
+        beta_real = beta_ideal;
+        while double(fi(beta_real, 1, 32, n_bits_fraction,'RoundingMethod', 'Floor')) < beta_ideal
+          beta_real = beta_real + 0.0001;    
+        end
 
-
-    % calculate beta
-    tmp_var = sqrt(max_eig/abs(mu));
-    beta_ideal = (tmp_var-1)/(tmp_var+1);
-    beta_real = beta_ideal;
-    while double(fi(beta_real, 1, current_design.n_bits_integer+current_design.n_bits_fraction,current_design.n_bits_fraction,'RoundingMethod', 'Floor')) < beta_ideal
-        beta_real = beta_real + 0.0001;    
+        qp_problem.beta_var = beta_real;
+        qp_problem.beta_plus = 1 + qp_problem.beta_var;
     end
-       
-    qp_problem.beta_var = beta_real;
-    qp_problem.beta_plus = 1 + qp_problem.beta_var;
 
 end
 

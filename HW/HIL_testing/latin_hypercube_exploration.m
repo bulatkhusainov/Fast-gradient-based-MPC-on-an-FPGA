@@ -3,12 +3,14 @@
 % N =         1:12
 % n_iter     20:500
 % q_ratio = 0.2:5
+% n_bits_integer 5:20
 
 input_range = [0.02  0.5; 
                   1   12;
                  20  500;
-                0.2    5];
-integer = [0 1 1 0];
+                0.2    5;
+                5    20];
+integer = [0 1 1 0 1];
 space_dimension = size(input_range,1);
 n_points = 200;
 
