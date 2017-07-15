@@ -16,9 +16,9 @@
 #define FLOAT_FIX_U_OPT_OUT 1
 
 //Input vectors FRACTIONLENGTH:
-#define X_HAT_IN_FRACTIONLENGTH 15
+#define X_HAT_IN_FRACTIONLENGTH 13
 //Output vectors FRACTIONLENGTH:
-#define U_OPT_OUT_FRACTIONLENGTH 15
+#define U_OPT_OUT_FRACTIONLENGTH 13
 
 ////////////////////////////////////////////////////////////
 //FPGA vectors memory maps

@@ -56,28 +56,34 @@ function [qp_problem] = qp_generator(current_design, model, model_c)
     qp_problem.H = B_big'*Q_big*B_big + R_big;
     qp_problem.h_x = A_big'*Q_big*B_big; %h = X'*h_x;
     
-    
-    % scale the Hessian matrix
-    n_bits_fraction = current_design.n_bits_fraction;
-    H_fixed = double(fi(qp_problem.H, 1, 32 , n_bits_fraction,'RoundingMethod', 'Floor'));
-    L_H_fixed = max(eig(H_fixed)); % max eigenvalue
-    a = 1/L_H_fixed;
-    L_scaled = max(eig(double(fi(a*H_fixed, 1, 32 , n_bits_fraction,'RoundingMethod', 'Floor'))));
-    while L_scaled > 1
-      % decrease scaling factor until the largest eigenvalue is
-      % smaller than or equal to 1
-      a = a*0.99;
-      L_scaled = max(eig(double(fi(a*H_fixed, 1, 32, n_bits_fraction,'RoundingMethod', 'Floor'))));
-    end
+    try
+        % scale the Hessian matrix
+        n_bits_fraction = current_design.n_bits_fraction;
+        H_fixed = double(fi(qp_problem.H, 1, 32 , n_bits_fraction,'RoundingMethod', 'Floor'));
+        L_H_fixed = max(eig(H_fixed)); % max eigenvalue
+        a = 1/L_H_fixed;
+        L_scaled = max(eig(double(fi(a*H_fixed, 1, 32 , n_bits_fraction,'RoundingMethod', 'Floor'))));
+        while L_scaled > 1
+          % decrease scaling factor until the largest eigenvalue is
+          % smaller than or equal to 1
+          a = a*0.99;
+          L_scaled = max(eig(double(fi(a*H_fixed, 1, 32, n_bits_fraction,'RoundingMethod', 'Floor'))));
+        end
 
-    H_n = a*H_fixed;
-    qp_problem.h_x = a*qp_problem.h_x;
-    qp_problem.H_diff_negative = -(eye(size(qp_problem.H)) - H_n);
+        H_n = a*H_fixed;
+        qp_problem.h_x = a*qp_problem.h_x;
+        qp_problem.H_diff_negative = -(eye(size(qp_problem.H)) - H_n);
+       
+        
+        L_scaled = max(eig(double(fi(H_n, 1, 32, n_bits_fraction,'RoundingMethod', 'Floor'))));    
+        mu_scaled = min(eig(double(fi(H_n, 1, 32, n_bits_fraction,'RoundingMethod', 'Floor')))); % min eigenvalue
+        qp_problem.mu = mu_scaled;
+    catch
+        % there was an error with scaling the Hessian
+        % setting mu to a negative value to indicate infeasible design
+        qp_problem.mu = -1;
+    end
     
-    
-    L_scaled = max(eig(double(fi(H_n, 1, 32, n_bits_fraction,'RoundingMethod', 'Floor'))));    
-    mu_scaled = min(eig(double(fi(H_n, 1, 32, n_bits_fraction,'RoundingMethod', 'Floor')))); % min eigenvalue
-    qp_problem.mu = mu_scaled;
     
     if qp_problem.mu > 0 % the remaining code will not make sense if Hessian is not convex
     

@@ -34,7 +34,7 @@
 //Input vectors size:
 #define X_HAT_IN_LENGTH 20
 //Output vectors size:
-#define U_OPT_OUT_LENGTH 70
+#define U_OPT_OUT_LENGTH 10
 
 
 ////////////////////////////////////////////////////////////
