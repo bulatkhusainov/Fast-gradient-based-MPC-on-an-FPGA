@@ -5,7 +5,7 @@
   Copyright (C) 1986-2017 Xilinx, Inc. All Rights Reserved.
 ================================================================
 INFO: [HLS 200-10] Running '/opt/Xilinx/Vivado_HLS/2017.1/bin/unwrapped/lnx64.o/vivado_hls'
-INFO: [HLS 200-10] For user 'bkhusain' on host 'bkhusain-HP-Z420-Workstation' (Linux_x86_64 version 4.4.0-83-generic) on Mon Jul 17 15:37:56 BST 2017
+INFO: [HLS 200-10] For user 'bkhusain' on host 'bkhusain-HP-Z420-Workstation' (Linux_x86_64 version 4.4.0-83-generic) on Sat Jul 22 10:27:42 BST 2017
 INFO: [HLS 200-10] On os Ubuntu 14.04.5 LTS
 INFO: [HLS 200-10] In directory '/home/bkhusain/Desktop/FGM_co_design_2/HW/HIL_testing/protoip_project'
 INFO: [HLS 200-10] Opening and resetting project '/home/bkhusain/Desktop/FGM_co_design_2/HW/HIL_testing/protoip_project/ip_design/build/prj/my_project0'.
@@ -20,20 +20,20 @@ INFO: [HLS 200-10] Analyzing design file '../../src/foo.cpp' ...
 INFO: [HLS 200-10] Analyzing design file '../../src/foo_user.cpp' ... 
 INFO: [HLS 200-10] Analyzing design file '../../src/user_fgm_mpc.cpp' ... 
 INFO: [HLS 200-10] Validating synthesis directives ...
-INFO: [HLS 200-111] Finished Checking Pragmas Time (s): cpu = 00:04:33 ; elapsed = 00:03:40 . Memory (MB): peak = 352.082 ; gain = 12.590 ; free physical = 12805 ; free virtual = 61171
-INFO: [HLS 200-111] Finished Linking Time (s): cpu = 00:04:53 ; elapsed = 00:04:00 . Memory (MB): peak = 352.082 ; gain = 12.590 ; free physical = 12473 ; free virtual = 61170
+INFO: [HLS 200-111] Finished Checking Pragmas Time (s): cpu = 00:04:36 ; elapsed = 00:03:42 . Memory (MB): peak = 352.082 ; gain = 12.590 ; free physical = 12873 ; free virtual = 61116
+INFO: [HLS 200-111] Finished Linking Time (s): cpu = 00:04:54 ; elapsed = 00:04:02 . Memory (MB): peak = 352.082 ; gain = 12.590 ; free physical = 12543 ; free virtual = 61116
 INFO: [HLS 200-10] Starting code transformations ...
-INFO: [HLS 200-111] Finished Standard Transforms Time (s): cpu = 00:05:26 ; elapsed = 00:04:34 . Memory (MB): peak = 1504.082 ; gain = 1164.590 ; free physical = 11224 ; free virtual = 60168
+INFO: [HLS 200-111] Finished Standard Transforms Time (s): cpu = 00:05:24 ; elapsed = 00:04:33 . Memory (MB): peak = 1504.082 ; gain = 1164.590 ; free physical = 11303 ; free virtual = 60122
 INFO: [HLS 200-10] Checking synthesizability ...
-INFO: [HLS 200-111] Finished Checking Synthesizability Time (s): cpu = 00:05:30 ; elapsed = 00:04:39 . Memory (MB): peak = 1632.082 ; gain = 1292.590 ; free physical = 11040 ; free virtual = 60022
-INFO: [HLS 200-111] Finished Pre-synthesis Time (s): cpu = 00:05:37 ; elapsed = 00:04:45 . Memory (MB): peak = 2055.621 ; gain = 1716.129 ; free physical = 10344 ; free virtual = 59569
+INFO: [HLS 200-111] Finished Checking Synthesizability Time (s): cpu = 00:05:28 ; elapsed = 00:04:37 . Memory (MB): peak = 1600.086 ; gain = 1260.594 ; free physical = 11113 ; free virtual = 59969
+INFO: [HLS 200-111] Finished Pre-synthesis Time (s): cpu = 00:05:35 ; elapsed = 00:04:44 . Memory (MB): peak = 2048.086 ; gain = 1708.594 ; free physical = 10425 ; free virtual = 59522
 INFO: [XFORM 203-541] Flattening a loop nest 'grad' (../../src/user_fgm_mpc.cpp:30:3) in function 'fgm_mpc'.
 INFO: [XFORM 203-541] Flattening a loop nest 'mv_mult' (../../src/user_fgm_mpc.cpp:55:4) in function 'fgm_mpc'.
 WARNING: [XFORM 203-542] Cannot flatten a loop nest 'iteration_loop' (../../src/user_fgm_mpc.cpp:47:3) in function 'fgm_mpc' : 
 WARNING: [XFORM 203-542] more than one sub loop.
 INFO: [XFORM 203-811] Inferring bus burst read of length 20 on port 'memory_inout' (../../src/foo.cpp:51:3).
-INFO: [XFORM 203-811] Inferring bus burst write of length 50 on port 'memory_inout' (../../src/foo.cpp:93:3).
-INFO: [HLS 200-111] Finished Architecture Synthesis Time (s): cpu = 00:05:40 ; elapsed = 00:04:49 . Memory (MB): peak = 2311.621 ; gain = 1972.129 ; free physical = 10018 ; free virtual = 59325
+INFO: [XFORM 203-811] Inferring bus burst write of length 40 on port 'memory_inout' (../../src/foo.cpp:93:3).
+INFO: [HLS 200-111] Finished Architecture Synthesis Time (s): cpu = 00:05:38 ; elapsed = 00:04:48 . Memory (MB): peak = 2290.828 ; gain = 1951.336 ; free physical = 10100 ; free virtual = 59279
 INFO: [HLS 200-10] Starting hardware synthesis ...
 INFO: [HLS 200-10] Synthesizing 'foo' ...
 INFO: [HLS 200-10] ----------------------------------------------------------------
@@ -60,32 +60,26 @@ INFO: [SCHED 204-61] Pipelining loop 'update_loop'.
 INFO: [SCHED 204-61] Pipelining result: Target II: 1, Final II: 1, Depth: 2.
 INFO: [SCHED 204-61] Pipelining loop 'output_loop'.
 INFO: [SCHED 204-61] Pipelining result: Target II: 1, Final II: 1, Depth: 2.
-WARNING: [SCHED 204-21] Estimated clock period (9.63ns) exceeds the target (target clock period: 10ns, clock uncertainty: 1.25ns, effective delay budget: 8.75ns).
-WARNING: [SCHED 204-21] The critical path consists of the following:
-	'mul' operation ('tmp_2', ../../src/user_fgm_mpc.cpp:35) (3.36 ns)
-	'add' operation ('tmp_3', ../../src/user_fgm_mpc.cpp:35) (3.02 ns)
-	'getelementptr' operation ('h_x_addr', ../../src/user_fgm_mpc.cpp:35) (0 ns)
-	'load' operation ('h_x_load', ../../src/user_fgm_mpc.cpp:35) on array 'h_x' (3.25 ns)
 INFO: [SCHED 204-11] Finished scheduling.
-INFO: [HLS 200-111]  Elapsed time: 289.22 seconds; current allocated memory: 1.661 GB.
+INFO: [HLS 200-111]  Elapsed time: 287.95 seconds; current allocated memory: 1.657 GB.
 INFO: [BIND 205-100] Starting micro-architecture generation ...
 INFO: [BIND 205-101] Performing variable lifetime analysis.
 INFO: [BIND 205-101] Exploring resource sharing.
 INFO: [BIND 205-101] Binding ...
 INFO: [BIND 205-100] Finished micro-architecture generation.
-INFO: [HLS 200-111]  Elapsed time: 0.16 seconds; current allocated memory: 1.661 GB.
+INFO: [HLS 200-111]  Elapsed time: 0.15 seconds; current allocated memory: 1.658 GB.
 INFO: [HLS 200-10] ----------------------------------------------------------------
 INFO: [HLS 200-10] -- Implementing module 'foo_user' 
 INFO: [HLS 200-10] ----------------------------------------------------------------
 INFO: [SCHED 204-11] Starting scheduling ...
 INFO: [SCHED 204-11] Finished scheduling.
-INFO: [HLS 200-111]  Elapsed time: 0.18 seconds; current allocated memory: 1.661 GB.
+INFO: [HLS 200-111]  Elapsed time: 0.18 seconds; current allocated memory: 1.658 GB.
 INFO: [BIND 205-100] Starting micro-architecture generation ...
 INFO: [BIND 205-101] Performing variable lifetime analysis.
 INFO: [BIND 205-101] Exploring resource sharing.
 INFO: [BIND 205-101] Binding ...
 INFO: [BIND 205-100] Finished micro-architecture generation.
-INFO: [HLS 200-111]  Elapsed time: 0.08 seconds; current allocated memory: 1.662 GB.
+INFO: [HLS 200-111]  Elapsed time: 0.09 seconds; current allocated memory: 1.658 GB.
 INFO: [HLS 200-10] ----------------------------------------------------------------
 INFO: [HLS 200-10] -- Implementing module 'foo' 
 INFO: [HLS 200-10] ----------------------------------------------------------------
@@ -99,36 +93,32 @@ INFO: [SCHED 204-61] Pipelining result: Target II: 1, Final II: 1, Depth: 2.
 INFO: [SCHED 204-61] Pipelining loop 'memcpy.memory_inout.u_opt_out.V.gep'.
 INFO: [SCHED 204-61] Pipelining result: Target II: 1, Final II: 1, Depth: 3.
 INFO: [SCHED 204-11] Finished scheduling.
-INFO: [HLS 200-111]  Elapsed time: 0.19 seconds; current allocated memory: 1.662 GB.
+INFO: [HLS 200-111]  Elapsed time: 0.2 seconds; current allocated memory: 1.659 GB.
 INFO: [BIND 205-100] Starting micro-architecture generation ...
 INFO: [BIND 205-101] Performing variable lifetime analysis.
 INFO: [BIND 205-101] Exploring resource sharing.
 INFO: [BIND 205-101] Binding ...
 INFO: [BIND 205-100] Finished micro-architecture generation.
-INFO: [HLS 200-111]  Elapsed time: 0.17 seconds; current allocated memory: 1.662 GB.
+INFO: [HLS 200-111]  Elapsed time: 0.18 seconds; current allocated memory: 1.659 GB.
 INFO: [HLS 200-10] ----------------------------------------------------------------
 INFO: [HLS 200-10] -- Generating RTL for module 'fgm_mpc' 
 INFO: [HLS 200-10] ----------------------------------------------------------------
 INFO: [SYN 201-210] Renamed object name 'fgm_mpc_H_diff_negative' to 'fgm_mpc_H_diff_nebkb' due to the length limit 20
-INFO: [SYN 201-210] Renamed object name 'foo_mac_muladd_5ns_7ns_6ns_11_1' to 'foo_mac_muladd_5ncud' due to the length limit 20
-INFO: [SYN 201-210] Renamed object name 'foo_mac_muladd_18s_12s_32ns_32_1' to 'foo_mac_muladd_18dEe' due to the length limit 20
-INFO: [SYN 201-210] Renamed object name 'foo_mac_muladd_6ns_7ns_6ns_12_1' to 'foo_mac_muladd_6neOg' due to the length limit 20
-INFO: [SYN 201-210] Renamed object name 'foo_mac_mulsub_15s_18s_32ns_32_1' to 'foo_mac_mulsub_15fYi' due to the length limit 20
-INFO: [SYN 201-210] Renamed object name 'foo_mul_mul_18s_16ns_32_1' to 'foo_mul_mul_18s_1g8j' due to the length limit 20
-INFO: [SYN 201-210] Renamed object name 'foo_mac_muladd_18s_15s_32s_32_1' to 'foo_mac_muladd_18hbi' due to the length limit 20
-INFO: [RTGEN 206-100] Generating core module 'foo_mac_muladd_18dEe': 1 instance(s).
-INFO: [RTGEN 206-100] Generating core module 'foo_mac_muladd_18hbi': 1 instance(s).
-INFO: [RTGEN 206-100] Generating core module 'foo_mac_muladd_5ncud': 1 instance(s).
-INFO: [RTGEN 206-100] Generating core module 'foo_mac_muladd_6neOg': 1 instance(s).
-INFO: [RTGEN 206-100] Generating core module 'foo_mac_mulsub_15fYi': 1 instance(s).
-INFO: [RTGEN 206-100] Generating core module 'foo_mul_mul_18s_1g8j': 1 instance(s).
+INFO: [SYN 201-210] Renamed object name 'foo_mac_muladd_8s_15s_26ns_26_1' to 'foo_mac_muladd_8scud' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'foo_mac_mulsub_15s_12s_26ns_26_1' to 'foo_mac_mulsub_15dEe' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'foo_mul_mul_15s_13ns_26_1' to 'foo_mul_mul_15s_1eOg' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'foo_mac_muladd_15s_12s_26s_26_1' to 'foo_mac_muladd_15fYi' due to the length limit 20
+INFO: [RTGEN 206-100] Generating core module 'foo_mac_muladd_15fYi': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'foo_mac_muladd_8scud': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'foo_mac_mulsub_15dEe': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'foo_mul_mul_15s_1eOg': 1 instance(s).
 INFO: [RTGEN 206-100] Finished creating RTL model for 'fgm_mpc'.
-INFO: [HLS 200-111]  Elapsed time: 0.26 seconds; current allocated memory: 1.664 GB.
+INFO: [HLS 200-111]  Elapsed time: 0.28 seconds; current allocated memory: 1.661 GB.
 INFO: [HLS 200-10] ----------------------------------------------------------------
 INFO: [HLS 200-10] -- Generating RTL for module 'foo_user' 
 INFO: [HLS 200-10] ----------------------------------------------------------------
 INFO: [RTGEN 206-100] Finished creating RTL model for 'foo_user'.
-INFO: [HLS 200-111]  Elapsed time: 0.47 seconds; current allocated memory: 1.667 GB.
+INFO: [HLS 200-111]  Elapsed time: 0.49 seconds; current allocated memory: 1.664 GB.
 INFO: [HLS 200-10] ----------------------------------------------------------------
 INFO: [HLS 200-10] -- Generating RTL for module 'foo' 
 INFO: [HLS 200-10] ----------------------------------------------------------------
@@ -138,7 +128,7 @@ INFO: [RTGEN 206-500] Setting interface mode on port 'foo/memory_inout' to 'm_ax
 INFO: [RTGEN 206-500] Setting interface mode on function 'foo' to 's_axilite & ap_ctrl_hs'.
 INFO: [RTGEN 206-100] Bundling port 'return', 'byte_x_hat_in_offset' and 'byte_u_opt_out_offset' to AXI-Lite port BUS_A.
 INFO: [RTGEN 206-100] Finished creating RTL model for 'foo'.
-INFO: [HLS 200-111]  Elapsed time: 0.18 seconds; current allocated memory: 1.669 GB.
+INFO: [HLS 200-111]  Elapsed time: 0.21 seconds; current allocated memory: 1.666 GB.
 INFO: [RTMG 210-279] Implementing memory 'fgm_mpc_h_x_rom' using auto ROMs.
 INFO: [RTMG 210-279] Implementing memory 'fgm_mpc_H_diff_nebkb_rom' using auto ROMs.
 INFO: [RTMG 210-279] Implementing memory 'fgm_mpc_b_upper_rom' using distributed ROMs.
@@ -147,7 +137,7 @@ INFO: [RTMG 210-278] Implementing memory 'fgm_mpc_Z_new_V_ram' using block RAMs.
 INFO: [RTMG 210-278] Implementing memory 'fgm_mpc_Z_V_ram' using distributed RAMs.
 INFO: [RTMG 210-278] Implementing memory 'foo_x_hat_in_int_V_ram' using distributed RAMs with power-on initialization.
 INFO: [RTMG 210-278] Implementing memory 'foo_x_hat_in_V_ram' using distributed RAMs.
-INFO: [HLS 200-111] Finished generating all RTL models Time (s): cpu = 00:05:42 ; elapsed = 00:04:52 . Memory (MB): peak = 2311.621 ; gain = 1972.129 ; free physical = 10004 ; free virtual = 59317
+INFO: [HLS 200-111] Finished generating all RTL models Time (s): cpu = 00:05:41 ; elapsed = 00:04:51 . Memory (MB): peak = 2290.828 ; gain = 1951.336 ; free physical = 10085 ; free virtual = 59269
 INFO: [SYSC 207-301] Generating SystemC RTL for foo.
 INFO: [VHDL 208-304] Generating VHDL RTL for foo.
 INFO: [VLOG 209-307] Generating Verilog RTL for foo.
@@ -164,5 +154,5 @@ source run_ippack.tcl -notrace
 INFO: [IP_Flow 19-234] Refreshing IP repositories
 INFO: [IP_Flow 19-1704] No user IP repositories specified
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx/Vivado/2017.1/data/ip'.
-INFO: [Common 17-206] Exiting Vivado at Mon Jul 17 15:42:55 2017...
-INFO: [HLS 200-112] Total elapsed time: 315.55 seconds; peak allocated memory: 1.669 GB.
+INFO: [Common 17-206] Exiting Vivado at Sat Jul 22 10:32:41 2017...
+INFO: [HLS 200-112] Total elapsed time: 315.97 seconds; peak allocated memory: 1.666 GB.

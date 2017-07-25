@@ -1,11 +1,11 @@
 #ifndef USER_FGM_MPC 
 #define USER_FGM_MPC 
 
-#define n_iter    62
+#define n_iter    427
 #define n_states  20
 #define m_inputs  10
-#define n_opt_var 50
-//#define N         5
+#define n_opt_var 40
+//#define N         4
 
 #include "user_protoip_definer.h"
 #ifdef PROTOIP

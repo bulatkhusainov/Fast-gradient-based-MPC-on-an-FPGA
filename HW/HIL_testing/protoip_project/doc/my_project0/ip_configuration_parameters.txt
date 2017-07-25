@@ -7,8 +7,8 @@ Input and output vectors:
 
 Name			| Direction		| Number of data 			| Data representation
 
-x_hat			 	| Input         | X_HAT_IN_LENGTH=20 			|data type "data_t_x_hat_in" is fixed-point: X_HAT_IN_INTEGERLENGTH=4  bits integer length, X_HAT_IN_FRACTIONLENGTH=14  bits fraction length
-u_opt			 	| Output         | U_OPT_OUT_LENGTH=50 			|data type "data_t_u_opt_in" is fixed-point: U_OPT_OUT_INTEGERLENGTH=4  bits integer length, U_OPT_OUT_FRACTIONLENGTH=14  bits fraction length
+x_hat			 	| Input         | X_HAT_IN_LENGTH=20 			|data type "data_t_x_hat_in" is fixed-point: X_HAT_IN_INTEGERLENGTH=4  bits integer length, X_HAT_IN_FRACTIONLENGTH=11  bits fraction length
+u_opt			 	| Output         | U_OPT_OUT_LENGTH=40 			|data type "data_t_u_opt_in" is fixed-point: U_OPT_OUT_INTEGERLENGTH=4  bits integer length, U_OPT_OUT_FRACTIONLENGTH=11  bits fraction length
 
 NOTES: 1) the following constants are defined in ip_design/src/foo_data.h and are used by ip_design/src/foo.cpp, ip_design/src/foo_user.cpp and ip_design/src/foo_test.cpp
        2) ip_design/src/foo_data.h is generated automatically, please do not edit manually.
@@ -24,14 +24,14 @@ X_HAT_IN_INTEGERLENGTH=4
 U_OPT_OUT_INTEGERLENGTH=4
 
 // Input vectors FRACTIONLENGTH:
-X_HAT_IN_FRACTIONLENGTH=14
+X_HAT_IN_FRACTIONLENGTH=11
 // Output vectors FRACTIONLENGTH:
-U_OPT_OUT_FRACTIONLENGTH=14
+U_OPT_OUT_FRACTIONLENGTH=11
 
 //Input vectors size:
 X_HAT_IN_LENGTH=20
 //Output vectors size:
-U_OPT_OUT_LENGTH=50
+U_OPT_OUT_LENGTH=40
 
 
 ---------------------------------------------------------
@@ -120,4 +120,4 @@ x_hat			 			| 3				| 0						| data vector	| 0
 To read output vectors from the FPGA to the host PC call Matlab function "FPGAclientMATLAB" in "test_HIL.m" using the following parameters:
 
 Output vector name		| Packet type 	|	Packet internal ID 	| Data to send	| Packet output size
-u_opt			 			| 4				| 0						| 0				| 50
+u_opt			 			| 4				| 0						| 0				| 40
